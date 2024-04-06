@@ -8,14 +8,9 @@ const Counter = () => {
   const [lastPlay, setLastPlay] = useState('');
 
   const handleAttack = () => {
-    // alert('Attack Clicked!');
     setCounter((preCounter) => {
       let newCount = preCounter + Math.round(Math.random() * 10);
       setLastPlay('Attacked');
-
-      //   if (newCount > 10) {
-      //     setGameStatus('You Won!');
-      //   }
 
       newCount > 10 ? setGameStatus('You Won!') : setGameStatus('');
 
@@ -23,15 +18,9 @@ const Counter = () => {
     });
   };
   const handleDefence = () => {
-    // alert('Defend Clicked!');
-    // setCounter(counter - 1);
     setCounter((preCounter) => {
       let newCount = preCounter - Math.round(Math.random() * 10);
       setLastPlay('Defended');
-      //   if (newCount < -10) {
-      //     setGameStatus('You Lose!');
-      //   }
-
       newCount < -10 ? setGameStatus('You Lose!') : setGameStatus('');
 
       return newCount;
@@ -44,12 +33,7 @@ const Counter = () => {
 
   const handleRandomPlay = () => {
     let playMode = Math.round(Math.random());
-    if (playMode === 0) {
-      handleAttack();
-    } else {
-      handleDefence();
-    }
-    // playMode === 0 ? handleAttack() : handleDefence;
+    playMode === 0 ? handleAttack() : handleDefence;
   };
 
   return (
@@ -57,14 +41,16 @@ const Counter = () => {
       <h1>Counter: {counter} </h1>
       <p>You win at +10 points and lose at -10 points</p>
       <p>Let's Play: {lastPlay} </p>
-      <p>Game status: {gameStatus}</p>
+      <p style={{ color: gameStatus === 'You Won!' ? 'lime' : gameStatus === 'You Lose!' ? 'tomato' : 'cyan' }}>
+        Game status: {gameStatus}
+      </p>
       <div className='col-6 col-md-3 offset-md-3'>
         <img
           className='p-4 rounded'
           src={attack}
           alt='Attack'
           onClick={handleAttack}
-          style={{ cursor: 'pointer', width: '100%', border: '2px solid green' }}
+          style={{ cursor: 'pointer', width: '100%', border: '2px solid lime' }}
         />
       </div>
       <div className='col-6 col-md-3'>
@@ -73,7 +59,7 @@ const Counter = () => {
           src={defend}
           alt='Defend'
           onClick={handleDefence}
-          style={{ cursor: 'pointer', width: '100%', border: '2px solid green' }}
+          style={{ cursor: 'pointer', width: '100%', border: '2px solid tomato' }}
         />
       </div>
 
