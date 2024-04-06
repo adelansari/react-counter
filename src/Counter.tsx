@@ -33,7 +33,7 @@ const Counter: FC = () => {
   return (
     <div className='row text-white text-center w-100'>
       <h1>Counter: {counter} </h1>
-      <p>You win at +10 points and lose at -10 points</p>
+      <p>You win at +15 points and lose at -15 points</p>
       <p>Let's Play: {lastPlay} </p>
       <p style={{ color: gameStatus === 'You Won!' ? 'lime' : gameStatus === 'You Lose!' ? 'tomato' : 'cyan' }}>
         Game status: {gameStatus}
