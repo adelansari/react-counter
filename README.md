@@ -4,6 +4,8 @@ This is a simple counter game built with React and TypeScript. The game is a fun
 
 ![Demo](./public/Demo.png)
 
+Demo: [Here](https://adelansari-react-counter.netlify.app)
+
 ## Project Structure
 
 The project is structured as follows:
