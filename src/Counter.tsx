@@ -1,39 +1,33 @@
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import attack from './assets/attack.png';
 import defend from './assets/defend.png';
 
-const Counter = () => {
-  const [counter, setCounter] = useState(0);
-  const [gameStatus, setGameStatus] = useState('');
-  const [lastPlay, setLastPlay] = useState('');
+const WIN_POINTS = 15;
+const LOSE_POINTS = -15;
 
-  const handleAttack = () => {
-    setCounter((preCounter) => {
-      let newCount = preCounter + Math.round(Math.random() * 10);
-      setLastPlay('Attacked');
+const Counter: FC = () => {
+  const [counter, setCounter] = useState<number>(0);
+  const [gameStatus, setGameStatus] = useState<string>('');
+  const [lastPlay, setLastPlay] = useState<string>('');
 
-      newCount > 10 ? setGameStatus('You Won!') : setGameStatus('');
+  const handlePlay = (isAttack: boolean): void => {
+    setCounter((preCounter: number) => {
+      const randomValue: number = Math.round(Math.random() * 10);
+      let newCount: number = isAttack ? preCounter + randomValue : preCounter - randomValue;
+      setLastPlay(isAttack ? 'Attacked' : 'Defended');
 
-      return newCount;
-    });
-  };
-  const handleDefence = () => {
-    setCounter((preCounter) => {
-      let newCount = preCounter - Math.round(Math.random() * 10);
-      setLastPlay('Defended');
-      newCount < -10 ? setGameStatus('You Lose!') : setGameStatus('');
-
+      setGameStatus(newCount > WIN_POINTS ? 'You Won!' : newCount < LOSE_POINTS ? 'You Lose!' : '');
       return newCount;
     });
   };
 
-  const handleReset = () => {
+  const handleReset = (): void => {
     setCounter(0);
   };
 
-  const handleRandomPlay = () => {
-    let playMode = Math.round(Math.random());
-    playMode === 0 ? handleAttack() : handleDefence;
+  const handleRandomPlay = (): void => {
+    let playMode: number = Math.round(Math.random());
+    handlePlay(playMode === 0);
   };
 
   return (
@@ -49,7 +43,7 @@ const Counter = () => {
           className='p-4 rounded'
           src={attack}
           alt='Attack'
-          onClick={handleAttack}
+          onClick={() => handlePlay(true)}
           style={{ cursor: 'pointer', width: '100%', border: '2px solid lime' }}
         />
       </div>
@@ -58,7 +52,7 @@ const Counter = () => {
           className='p-4 rounded'
           src={defend}
           alt='Defend'
-          onClick={handleDefence}
+          onClick={() => handlePlay(false)}
           style={{ cursor: 'pointer', width: '100%', border: '2px solid tomato' }}
         />
       </div>
