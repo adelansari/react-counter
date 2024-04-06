@@ -1,19 +1,48 @@
+import { useState } from 'react';
+import attack from './assets/attack.png';
+import defend from './assets/defend.png';
+
 const Counter = () => {
+  const [counter, setCounter] = useState(0);
+
   const handleAttack = () => {
-    alert('Attack Clicked!');
+    // alert('Attack Clicked!');
+    setCounter((preCounter) => preCounter + 1);
   };
   const handleDefence = () => {
-    alert('Defend Clicked!');
+    // alert('Defend Clicked!');
+    // setCounter(counter - 1);
+    setCounter((preCounter) => preCounter - 1);
   };
   return (
-    <div className='row text-white'>
-      <h1>Counter: </h1>
-      <button onClick={handleAttack} style={{ width: '200px' }}>
-        +1
-      </button>
-      <button onClick={handleDefence} style={{ width: '200px' }}>
-        -1
-      </button>
+    <div className='row text-white text-center'>
+      <h1>Counter: {counter} </h1>
+      <p>You win at +10 points and lose at -10 points</p>
+      <p>Let's Play: </p>
+      <p>Game status:</p>
+      <div className='col-6 col-md-3 offset-md-3'>
+        <img
+          className='p-4 rounded'
+          src={attack}
+          alt='Attack'
+          onClick={handleAttack}
+          style={{ cursor: 'pointer', width: '100%', border: '2px solid green' }}
+        />
+      </div>
+      <div className='col-6 col-md-3'>
+        <img
+          className='p-4 rounded'
+          src={defend}
+          alt='Defend'
+          onClick={handleDefence}
+          style={{ cursor: 'pointer', width: '100%', border: '2px solid green' }}
+        />
+      </div>
+
+      <div className='col-12 col-md-4 offset-md-4'>
+        <button className='btn btn-secondary w-100 mt-2'>Random Play</button>
+        <button className='btn btn-warning w-100 mt-2'>Reset</button>
+      </div>
     </div>
   );
 };
