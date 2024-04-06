@@ -53,7 +53,7 @@ const Counter = () => {
   };
 
   return (
-    <div className='row text-white text-center'>
+    <div className='row text-white text-center w-100'>
       <h1>Counter: {counter} </h1>
       <p>You win at +10 points and lose at -10 points</p>
       <p>Let's Play: {lastPlay} </p>
