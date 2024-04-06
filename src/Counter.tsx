@@ -4,11 +4,21 @@ import defend from './assets/defend.png';
 
 const Counter = () => {
   const [counter, setCounter] = useState(0);
+  const [gameStatus, setGameStatus] = useState('');
+  const [lastPlay, setLastPlay] = useState('');
 
   const handleAttack = () => {
     // alert('Attack Clicked!');
     setCounter((preCounter) => {
       let newCount = preCounter + Math.round(Math.random() * 10);
+      setLastPlay('Attacked');
+
+      //   if (newCount > 10) {
+      //     setGameStatus('You Won!');
+      //   }
+
+      newCount > 10 ? setGameStatus('You Won!') : setGameStatus('');
+
       return newCount;
     });
   };
@@ -17,6 +27,13 @@ const Counter = () => {
     // setCounter(counter - 1);
     setCounter((preCounter) => {
       let newCount = preCounter - Math.round(Math.random() * 10);
+      setLastPlay('Defended');
+      //   if (newCount < -10) {
+      //     setGameStatus('You Lose!');
+      //   }
+
+      newCount < -10 ? setGameStatus('You Lose!') : setGameStatus('');
+
       return newCount;
     });
   };
@@ -39,8 +56,8 @@ const Counter = () => {
     <div className='row text-white text-center'>
       <h1>Counter: {counter} </h1>
       <p>You win at +10 points and lose at -10 points</p>
-      <p>Let's Play: </p>
-      <p>Game status:</p>
+      <p>Let's Play: {lastPlay} </p>
+      <p>Game status: {gameStatus}</p>
       <div className='col-6 col-md-3 offset-md-3'>
         <img
           className='p-4 rounded'
